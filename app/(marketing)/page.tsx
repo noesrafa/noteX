@@ -19,7 +19,7 @@ const MarketingPage = () => {
           <button>Sign in</button>
         </SignInButton>
       )}
-      {!isLoading && isAuthenticated && <UserButton afterSignOutUrl="/" />}
+      {!isLoading && isAuthenticated && <UserButton afterSignOutUrl="/notes" />}
     </div>
   );
 };

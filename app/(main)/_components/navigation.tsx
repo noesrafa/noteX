@@ -105,7 +105,7 @@ const Navigation = () => {
     <>
       <aside
         ref={sidepanelRef}
-        className={`group/sidebar h-full bg-black/85 overflow-y-auto relative flex w-60 flex-col z-[999] border-r border-white/30 ${
+        className={`group/sidebar h-full bg-black/80 overflow-y-auto relative flex w-60 flex-col z-[999] border-r border-white/30 whitespace-nowrap overflow-x-hidden ${
           isReset && "transition-all ease-in-out duration-300"
         } ${isCellphone && "w-0"}`}
       >
@@ -116,11 +116,11 @@ const Navigation = () => {
         <div
           onClick={closeSidepanel}
           role="button"
-          className={`h-8 w-8 text-muted-foreground rounded-sm hover:bg-white/5 absolute top-4 right-4 opacity-0 group-hover/sidebar:opacity-100 transition flex items-center justify-center ${
+          className={`h-8 w-8 text-muted-foreground rounded-sm hover:bg-white/15 absolute top-4 right-4 opacity-0 group-hover/sidebar:opacity-70 hover:!opacity-100 transition flex items-center justify-center ${
             isCellphone && "opacity-100"
           }`}
         >
-          <CaretDoubleLeft className="text-white/25" size={24} />
+          <CaretDoubleLeft className="text-white" size={24} />
         </div>
         {/* ========= RESIZE ========= */}
         <div
@@ -136,7 +136,18 @@ const Navigation = () => {
           isReset && "transition-all ease-in-out duration-300"
         } ${isCellphone && "left-0 w-full"}`}
       >
-        <nav>{isClosed && <List onClick={resetearWidth} />}</nav>
+        <nav className="group/nav p-2">
+          {isClosed && (
+            <div className="h-9 w-9 flex justify-center items-center opacity-70 group-hover/nav:opacity-100 hover:bg-white/15 transition rounded-md cursor-pointer">
+              <List
+                onClick={resetearWidth}
+                width={28}
+                height={28}
+                className="min-w-[64px]"
+              />
+            </div>
+          )}
+        </nav>
       </div>
     </>
   );

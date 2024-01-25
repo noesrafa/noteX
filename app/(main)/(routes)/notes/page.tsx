@@ -7,17 +7,13 @@ import React from "react";
 
 const NotesPage = () => {
   const { user } = useUser();
-  console.log(user);
 
   return (
     <div
-      style={{
-        backgroundImage: `url('/pattern.svg')`,
-      }}
       className={`p-10 bg-black/65 w-full h-full`}
     >
       <div className="w-full h-full flex flex-col justify-center items-center gap-3">
-        <h2 className="orbitron text-4xl font-semibold">Welcome!</h2>
+        <h2 className="text-4xl font-semibold">Welcome!</h2>
         <p className="opacity-70 mb-3">
           Embark on your space journey! Start documenting every unique moment
           and amazing discovery.

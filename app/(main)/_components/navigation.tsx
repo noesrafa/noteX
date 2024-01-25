@@ -6,6 +6,7 @@ import React, { ElementRef, useEffect, useRef, useState } from "react";
 import { useMediaQuery } from "usehooks-ts";
 import Logo from "../../../assets/images/logo-sm.svg";
 import Image from "next/image";
+import ProfileModal from "./profileModal";
 
 const Navigation = () => {
   const pathname = usePathname();
@@ -110,8 +111,8 @@ const Navigation = () => {
         } ${isCellphone && "w-0"}`}
       >
         <Image src={Logo} height={22} alt="logo" className="m-8" />
-        <p className="ml-8 mt-2 opacity-60">Rafael Alexander</p>
-        <hr className="mt-4 !opacity-20" />
+        <ProfileModal />
+        <hr className="!opacity-20" />
         {/* ========= COLLAPSE ========= */}
         <div
           onClick={closeSidepanel}

@@ -1,9 +1,9 @@
-<svg width="93" height="93" viewBox="0 0 93 93" fill="none" xmlns="http://www.w3.org/2000/svg">
-<g opacity="0.07">
-<rect x="0.245264" y="0.419839" width="91.7211" height="91.7211" stroke="white" stroke-width="0.2"/>
-<path d="M7.93976 1.48569H1.31226V8.11319" stroke="white" stroke-width="0.77852"/>
-<path d="M7.89557 91.0752H1.26807V84.4477" stroke="white" stroke-width="0.77852"/>
-<path d="M90.9099 8.09375L90.9099 1.46625L84.2824 1.46625" stroke="white" stroke-width="0.77852"/>
-<path d="M90.9155 84.4535L90.9155 91.081L84.288 91.081" stroke="white" stroke-width="0.77852"/>
+<svg width="119" height="120" viewBox="0 0 119 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g opacity="0.05">
+<rect x="0.274452" y="1.03411" width="118.493" height="118.493" stroke="white" stroke-width="0.258376"/>
+<path d="M10.215 2.41106H1.65308V10.973" stroke="white" stroke-width="1.00575"/>
+<path d="M10.1579 118.15H1.59595V109.588" stroke="white" stroke-width="1.00575"/>
+<path d="M117.402 10.9479L117.402 2.38594L108.84 2.38594" stroke="white" stroke-width="1.00575"/>
+<path d="M117.409 109.595L117.409 118.157L108.847 118.157" stroke="white" stroke-width="1.00575"/>
 </g>
 </svg>

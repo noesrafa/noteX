@@ -7,10 +7,13 @@ import { useMediaQuery } from "usehooks-ts";
 import Logo from "../../../assets/images/logo-sm.svg";
 import Image from "next/image";
 import ProfileModal from "./profileModal";
+import { SignInButton } from "@clerk/clerk-react";
+import { useConvexAuth } from "convex/react";
 
 const Navigation = () => {
   const pathname = usePathname();
   const isCellphone = useMediaQuery("(max-width: 768px)");
+  const { isLoading, isAuthenticated } = useConvexAuth();
 
   const isResizeRef = useRef(false);
   const sidepanelRef = useRef<ElementRef<"aside">>(null);
@@ -108,17 +111,25 @@ const Navigation = () => {
         ref={sidepanelRef}
         className={`group/sidebar h-full bg-black/80 overflow-y-auto relative flex w-60 flex-col z-[999] border-r border-white/30 whitespace-nowrap overflow-x-hidden ${
           isReset && "transition-all ease-in-out duration-300"
-        } ${isCellphone && "w-0"}`}
+        } ${isCellphone && "w-0 !border-none"}`}
       >
         <Image src={Logo} height={22} alt="logo" className="m-8" />
-        <ProfileModal />
-        <hr className="!opacity-20" />
+        {!isLoading && isAuthenticated ? (
+          <ProfileModal />
+        ) : (
+          <SignInButton mode="modal">
+            <button className="text-left px-6 py-3 opacity-80 hover:bg-white/10 transition text-sm">
+              Sign in to start!
+            </button>
+          </SignInButton>
+        )}
+        <hr className="!opacity-30" />
         {/* ========= COLLAPSE ========= */}
         <div
           onClick={closeSidepanel}
           role="button"
           className={`h-8 w-8 text-muted-foreground rounded-sm hover:bg-white/15 absolute top-4 right-4 opacity-0 group-hover/sidebar:opacity-70 hover:!opacity-100 transition flex items-center justify-center ${
-            isCellphone && "opacity-100"
+            isCellphone && "!opacity-100"
           }`}
         >
           <CaretDoubleLeft className="text-white" size={24} />

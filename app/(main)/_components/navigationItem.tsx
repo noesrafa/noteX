@@ -1,7 +1,11 @@
 import { Skeleton } from "@/components/ui/skeleton";
+import { api } from "@/convex/_generated/api";
 import { Id } from "@/convex/_generated/dataModel";
-import { ChevronDown, ChevronRight, LucideIcon } from "lucide-react";
+import { useMutation } from "convex/react";
+import { ChevronDown, ChevronRight, LucideIcon, Plus } from "lucide-react";
+import { useRouter } from "next/navigation";
 import React, { ReactNode } from "react";
+import { toast } from "sonner";
 
 type Props = {
   onClick: () => void;
@@ -30,6 +34,9 @@ export const NavigationItem: React.FC<Props> & { Skeleton: any } = ({
 }) => {
   const ChevronIcon = expanded ? ChevronDown : ChevronRight;
 
+  const create = useMutation(api.notes.create);
+  const router = useRouter();
+
   const handleExpand = (
     event: React.MouseEvent<HTMLDivElement, MouseEvent>
   ) => {
@@ -37,10 +44,31 @@ export const NavigationItem: React.FC<Props> & { Skeleton: any } = ({
     onExpand?.();
   };
 
+  const onCreate = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    event.stopPropagation();
+
+    if (!id) return;
+
+    const promise = create({ heading: "Untitled", parent_note: id }).then(
+      (noteId) => {
+        if (!expanded) {
+          onExpand?.();
+        }
+        // router.push(`/notes/${noteId}`);
+      }
+    );
+
+    toast.promise(promise, {
+      loading: "Creating note...",
+      success: "Note created!",
+      error: "Error creating note",
+    });
+  };
+
   return (
     <div
       onClick={onClick}
-      className="px-4 py-1 hover:bg-detail text-sm opacity-80 cursor-pointer flex items-center gap-1"
+      className="group px-4 py-1 hover:bg-detail text-sm opacity-80 cursor-pointer flex items-center gap-1"
       style={{
         paddingLeft: level ? `${level * 12 + 12}px` : "12px",
         backgroundColor: active ? "var(--color-detail)" : "",
@@ -52,7 +80,7 @@ export const NavigationItem: React.FC<Props> & { Skeleton: any } = ({
           role="button"
           className="group/expand h-full rounded-sm hover:bg-detail"
         >
-          <ChevronIcon className="h-4 w-4 shrink-0 text-secondary opacity-50 group-hover/expand:opacity-100" />
+          <ChevronIcon className="h-5 w-5 shrink-0 text-secondary opacity-50 group-hover/expand:opacity-100" />
         </div>
       )}
       {noteIcon ? <div>{noteIcon}</div> : <div>{icon}</div>}
@@ -62,6 +90,15 @@ export const NavigationItem: React.FC<Props> & { Skeleton: any } = ({
           <span className="text-[9px] font-semibold">⌘</span>
           <span className="font-semibold">k</span>
         </kbd>
+      )}
+      {!!id && (
+        <div
+          role="button"
+          onClick={onCreate}
+          className="ml-auto opacity-0 group-hover:opacity-60 hover:!opacity-100"
+        >
+          <Plus className="" width={20} />
+        </div>
       )}
     </div>
   );

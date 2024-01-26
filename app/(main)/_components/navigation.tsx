@@ -12,7 +12,7 @@ import { api } from "@/convex/_generated/api";
 import { toast } from "sonner";
 import { Search, Settings } from "lucide-react";
 import { NavigationItem } from "./navigationItem";
-import NotesList from "./notes-list";
+import NoteList from "./note-list";
 
 const Navigation = () => {
   const pathname = usePathname();
@@ -112,7 +112,7 @@ const Navigation = () => {
   const create = useMutation(api.notes.create);
 
   const onCreate = () => {
-    const promise = create({ heading: "Yujuuu" });
+    const promise = create({ heading: "Untitled" });
 
     toast.promise(promise, {
       loading: "Creating note...",
@@ -167,7 +167,7 @@ const Navigation = () => {
           }
         />
         <div className="divider mb-2 mt-2" />
-        {!isLoading && isAuthenticated && <NotesList />}
+        {!isLoading && isAuthenticated && <NoteList />}
         <ButtonTheme />
         {/* ========= COLLAPSE ========= */}
         <div

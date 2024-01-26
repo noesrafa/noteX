@@ -14,7 +14,7 @@ type Props = {
   data?: Doc<"notes">[];
 };
 
-const NotesList: React.FC<Props> = ({ parentNoteId, level = 0, data = [] }) => {
+const NoteList: React.FC<Props> = ({ parentNoteId, level = 0, data = [] }) => {
   const params = useParams();
   const router = useRouter();
 
@@ -75,7 +75,7 @@ const NotesList: React.FC<Props> = ({ parentNoteId, level = 0, data = [] }) => {
             expanded={expanded[note._id]}
           />
           {expanded[note._id] && (
-            <NotesList parentNoteId={note._id} level={level + 1} />
+            <NoteList parentNoteId={note._id} level={level + 1} />
           )}
         </div>
       ))}
@@ -83,4 +83,4 @@ const NotesList: React.FC<Props> = ({ parentNoteId, level = 0, data = [] }) => {
   );
 };
 
-export default NotesList;
+export default NoteList;

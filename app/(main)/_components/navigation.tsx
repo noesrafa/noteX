@@ -9,6 +9,8 @@ import Image from "next/image";
 import ProfileModal from "./profileModal";
 import { SignInButton } from "@clerk/clerk-react";
 import { useConvexAuth } from "convex/react";
+import { useTheme } from "next-themes";
+import ButtonTheme from "@/components/buttonTheme/buttonTheme";
 
 const Navigation = () => {
   const pathname = usePathname();
@@ -109,48 +111,49 @@ const Navigation = () => {
     <>
       <aside
         ref={sidepanelRef}
-        className={`group/sidebar h-full bg-black/80 overflow-y-auto relative flex w-60 flex-col z-[999] border-r border-white/30 whitespace-nowrap overflow-x-hidden ${
+        className={`group/sidebar h-full overflow-y-auto relative flex w-60 flex-col z-[999] border-r border-detail whitespace-nowrap overflow-x-hidden ${
           isReset && "transition-all ease-in-out duration-300"
         } ${isCellphone && "w-0 !border-none"}`}
       >
-        <Image src={Logo} height={22} alt="logo" className="m-8" />
+        <p className="orbitron p-5">NoteX</p>
         {!isLoading && isAuthenticated ? (
           <ProfileModal />
         ) : (
           <SignInButton mode="modal">
-            <button className="text-left px-6 py-3 opacity-80 hover:bg-white/10 transition text-sm">
+            <button className="text-left px-6 py-3 opacity-80 hover:bg-detail text-sm">
               Sign in to start!
             </button>
           </SignInButton>
         )}
-        <hr className="!opacity-30" />
+        <div className="divider" />
+        <ButtonTheme />
         {/* ========= COLLAPSE ========= */}
         <div
           onClick={closeSidepanel}
           role="button"
-          className={`h-8 w-8 text-muted-foreground rounded-sm hover:bg-white/15 absolute top-4 right-4 opacity-0 group-hover/sidebar:opacity-70 hover:!opacity-100 transition flex items-center justify-center ${
+          className={`h-8 w-8 text-muted-foreground rounded-sm hover:bg-detail absolute top-4 right-4 opacity-60 group-hover/sidebar:opacity-70 hover:!opacity-100 transition flex items-center justify-center ${
             isCellphone && "!opacity-100"
           }`}
         >
-          <CaretDoubleLeft className="text-white" size={24} />
+          <CaretDoubleLeft className="text-secondary" size={24} />
         </div>
         {/* ========= RESIZE ========= */}
         <div
           onMouseDown={handleResize}
           onClick={resetearWidth}
-          className="opacity-0 group-hover/sidebar:opacity-100 transition cursor-ew-resize absolute h-full w-1 bg-white/15 right-0 top-0"
+          className="opacity-0 group-hover/sidebar:opacity-100 cursor-ew-resize absolute h-full w-1 bg-detail right-0 top-0"
         />
       </aside>
       {/* ========== NAVIGATION BAR ========== */}
       <div
         ref={navigationBarRef}
         className={`absolute top-0 z-[999] left-60 w-[calc(100%-240px)] ${
-          isReset && "transition-all ease-in-out duration-300"
+          isReset && "transition-transform ease-in-out duration-300"
         } ${isCellphone && "left-0 w-full"}`}
       >
         <nav className="group/nav p-2">
           {isClosed && (
-            <div className="h-9 w-9 flex justify-center items-center opacity-70 group-hover/nav:opacity-100 hover:bg-white/15 transition rounded-md cursor-pointer">
+            <div className="h-9 w-9 flex justify-center items-center opacity-70 group-hover/nav:opacity-100 hover:bg-detail transition rounded-md cursor-pointer">
               <List
                 onClick={resetearWidth}
                 width={28}

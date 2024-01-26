@@ -1,12 +1,26 @@
 "use client";
 
 import Button from "@/components/button/button";
+import { api } from "@/convex/_generated/api";
 import { useUser } from "@clerk/clerk-react";
-import Image from "next/image";
+import { useMutation } from "convex/react";
 import React from "react";
+import { toast } from "sonner";
 
 const NotesPage = () => {
   const { user } = useUser();
+  const create = useMutation(api.notes.create);
+
+  const onCreate = () => {
+    console.log("Creating note");
+    const promise = create({ heading: "Yujuuu" });
+
+    toast.promise(promise, {
+      loading: "Creating note...",
+      success: "Note created!",
+      error: "Error creating note",
+    });
+  };
 
   return (
     <div className={`p-10  w-full h-full`}>
@@ -16,7 +30,7 @@ const NotesPage = () => {
           Embark on your space journey! Start documenting every unique moment
           and amazing discovery.
         </p>
-        <Button>Create new space note</Button>
+        <Button onClick={onCreate}>Create new space note</Button>
       </div>
     </div>
   );

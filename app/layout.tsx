@@ -2,12 +2,11 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import ConvexProviderClient from "@/components/providers/convex-provider";
-import { ThemeProvider } from "@/components/providers/theme-provider";
+import { Toaster } from "sonner";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  // title: "Workspace — By ",
   title: "NoteX",
   description: "Recreating Notion in Next.js",
   icons: {
@@ -34,7 +33,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <ConvexProviderClient>{children}</ConvexProviderClient>
+        <ConvexProviderClient>
+          <Toaster position="bottom-center" />
+          {children}
+        </ConvexProviderClient>
       </body>
     </html>
   );

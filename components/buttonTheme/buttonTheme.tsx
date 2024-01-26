@@ -19,6 +19,7 @@ const ButtonTheme = () => {
   const changeTheme = (theme: string) => {
     document.querySelector("html")?.setAttribute("data-theme", theme);
   };
+  
   return (
     <div className="flex flex-wrap gap-2 p-5 ">
       {themes.map((theme) => (

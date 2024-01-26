@@ -8,14 +8,16 @@ import Logo from "../../../assets/images/logo-sm.svg";
 import Image from "next/image";
 import ProfileModal from "./profileModal";
 import { SignInButton } from "@clerk/clerk-react";
-import { useConvexAuth } from "convex/react";
+import { useConvexAuth, useQuery } from "convex/react";
 import { useTheme } from "next-themes";
 import ButtonTheme from "@/components/buttonTheme/buttonTheme";
+import { api } from "@/convex/_generated/api";
 
 const Navigation = () => {
   const pathname = usePathname();
   const isCellphone = useMediaQuery("(max-width: 768px)");
   const { isLoading, isAuthenticated } = useConvexAuth();
+  const notes = useQuery(api.notes.get);
 
   const isResizeRef = useRef(false);
   const sidepanelRef = useRef<ElementRef<"aside">>(null);
@@ -127,6 +129,9 @@ const Navigation = () => {
         )}
         <div className="divider" />
         <ButtonTheme />
+        {notes?.map((note) => (
+          <p key={note._id}>{note.heading}</p>
+        ))}
         {/* ========= COLLAPSE ========= */}
         <div
           onClick={closeSidepanel}

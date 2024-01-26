@@ -13,11 +13,22 @@ import { useTheme } from "next-themes";
 import ButtonTheme from "@/components/buttonTheme/buttonTheme";
 import { api } from "@/convex/_generated/api";
 
+const RegisteredUser = () => {
+  const notes = useQuery(api.notes.get);
+
+  return (
+    <div>
+      {notes?.map((note) => (
+        <p key={note._id}>{note.heading}</p>
+      ))}
+    </div>
+  );
+};
+
 const Navigation = () => {
   const pathname = usePathname();
   const isCellphone = useMediaQuery("(max-width: 768px)");
   const { isLoading, isAuthenticated } = useConvexAuth();
-  const notes = useQuery(api.notes.get);
 
   const isResizeRef = useRef(false);
   const sidepanelRef = useRef<ElementRef<"aside">>(null);
@@ -129,9 +140,7 @@ const Navigation = () => {
         )}
         <div className="divider" />
         <ButtonTheme />
-        {notes?.map((note) => (
-          <p key={note._id}>{note.heading}</p>
-        ))}
+        {!isLoading && isAuthenticated && <RegisteredUser />}
         {/* ========= COLLAPSE ========= */}
         <div
           onClick={closeSidepanel}

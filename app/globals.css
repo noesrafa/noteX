@@ -47,6 +47,6 @@ html[data-theme="theme2"] {
 
 html[data-theme="theme3"] {
   --color-primary: #182938;
-  --color-detail: #20364A;
+  --color-detail: #243c53;
   --color-secondary: #b8d4f5;
 }

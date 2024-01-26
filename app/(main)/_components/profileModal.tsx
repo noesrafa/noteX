@@ -17,10 +17,10 @@ const ProfileModal = () => {
     <div>
       <div
         onClick={handleOpenModal}
-        className="opacity-70 w-full flex items-center justify-between hover:bg-detail transition cursor-pointer px-4 py-3 relative"
+        className=" w-full flex items-center justify-between hover:bg-detail transition cursor-pointer px-4 py-3 relative"
       >
         <p className="text-sm">{user?.fullName ?? "Invited"}</p>
-        <CaretUpDown className="opacity-60" />
+        <CaretUpDown className="opacity-80" />
       </div>
       <div
         className={`flex flex-col  border-detail overflow-y-hidden h-0 ${
@@ -32,10 +32,10 @@ const ProfileModal = () => {
             <Image src={user?.imageUrl} alt="" width={44} height={44} />
           )}
           <p className="flex flex-col ">
-            <span className="text-sm opacity-75 font-semibold">
+            <span className="text-sm font-semibold">
               {user?.fullName ?? "Invited"}
             </span>
-            <span className="text-xs opacity-40">
+            <span className="text-xs opacity-80">
               {user?.primaryEmailAddress?.emailAddress ?? "no-email"}
             </span>
           </p>

@@ -1,29 +1,18 @@
 "use client";
 
 import { usePathname } from "next/navigation";
-import { CaretDoubleLeft, List } from "@phosphor-icons/react";
+import { CaretDoubleLeft, List, Plus } from "@phosphor-icons/react";
 import React, { ElementRef, useEffect, useRef, useState } from "react";
 import { useMediaQuery } from "usehooks-ts";
-import Logo from "../../../assets/images/logo-sm.svg";
-import Image from "next/image";
 import ProfileModal from "./profileModal";
 import { SignInButton } from "@clerk/clerk-react";
-import { useConvexAuth, useQuery } from "convex/react";
-import { useTheme } from "next-themes";
+import { useConvexAuth, useMutation, useQuery } from "convex/react";
 import ButtonTheme from "@/components/buttonTheme/buttonTheme";
 import { api } from "@/convex/_generated/api";
-
-const RegisteredUser = () => {
-  const notes = useQuery(api.notes.get);
-
-  return (
-    <div>
-      {notes?.map((note) => (
-        <p key={note._id}>{note.heading}</p>
-      ))}
-    </div>
-  );
-};
+import { toast } from "sonner";
+import { Search, Settings } from "lucide-react";
+import { NavigationItem } from "./navigationItem";
+import NotesList from "./notes-list";
 
 const Navigation = () => {
   const pathname = usePathname();
@@ -120,6 +109,18 @@ const Navigation = () => {
     }
   }, [pathname, isCellphone]);
 
+  const create = useMutation(api.notes.create);
+
+  const onCreate = () => {
+    const promise = create({ heading: "Yujuuu" });
+
+    toast.promise(promise, {
+      loading: "Creating note...",
+      success: "Note created!",
+      error: "Error creating note",
+    });
+  };
+
   return (
     <>
       <aside
@@ -138,9 +139,36 @@ const Navigation = () => {
             </button>
           </SignInButton>
         )}
-        <div className="divider" />
+        <div className="divider mb-2" />
+        <NavigationItem
+          onClick={() => {}}
+          label="Search"
+          isSearch
+          icon={
+            <Search width={14} height={14} className="min-w-4 text-secondary" />
+          }
+        />
+        <NavigationItem
+          onClick={() => {}}
+          label="Settings"
+          icon={
+            <Settings
+              width={14}
+              height={14}
+              className="min-w-4 text-secondary"
+            />
+          }
+        />
+        <NavigationItem
+          onClick={onCreate}
+          label="Create new note"
+          icon={
+            <Plus width={14} height={14} className="min-w-4 text-secondary" />
+          }
+        />
+        <div className="divider mb-2 mt-2" />
+        {!isLoading && isAuthenticated && <NotesList />}
         <ButtonTheme />
-        {!isLoading && isAuthenticated && <RegisteredUser />}
         {/* ========= COLLAPSE ========= */}
         <div
           onClick={closeSidepanel}

@@ -125,7 +125,7 @@ const Navigation = () => {
     <>
       <aside
         ref={sidepanelRef}
-        className={`group/sidebar h-full overflow-y-auto relative flex w-60 flex-col z-[999] border-r border-detail whitespace-nowrap overflow-x-hidden ${
+        className={`group/sidebar h-full overflow-x-hidden relative flex w-60 flex-col z-[999] border-r border-detail whitespace-nowrap  ${
           isReset && "transition-all ease-in-out duration-300"
         } ${isCellphone && "w-0 !border-none"}`}
       >
@@ -167,7 +167,9 @@ const Navigation = () => {
           }
         />
         <div className="divider mb-2 mt-2" />
-        {!isLoading && isAuthenticated && <NoteList />}
+        <div className="overflow-y-auto">
+          {!isLoading && isAuthenticated && <NoteList />}
+        </div>
         <ButtonTheme />
         {/* ========= COLLAPSE ========= */}
         <div

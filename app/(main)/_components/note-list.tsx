@@ -53,9 +53,9 @@ const NoteList: React.FC<Props> = ({ parentNoteId, level = 0, data = [] }) => {
   return (
     <>
       <p
-        className={`hidden mb-1
+        className={`hidden mb-1 mt-1
           text-sm opacity-40 font-semibold
-          ${expanded && "last:block"} 
+          ${expanded && level > 0 && "last:block"} 
           ${level === 0 && "hidden"}`}
         style={{ paddingLeft: level ? `${level * 12 + 22}px` : undefined }}
       >

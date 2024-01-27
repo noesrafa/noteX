@@ -2,7 +2,14 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { api } from "@/convex/_generated/api";
 import { Id } from "@/convex/_generated/dataModel";
 import { useMutation } from "convex/react";
-import { ChevronDown, ChevronRight, LucideIcon, Plus } from "lucide-react";
+import {
+  ChevronDown,
+  ChevronRight,
+  LucideIcon,
+  MoreHorizontal,
+  Plus,
+  Trash,
+} from "lucide-react";
 import { useRouter } from "next/navigation";
 import React, { ReactNode } from "react";
 import { toast } from "sonner";
@@ -35,7 +42,21 @@ export const NavigationItem: React.FC<Props> & { Skeleton: any } = ({
   const ChevronIcon = expanded ? ChevronDown : ChevronRight;
 
   const create = useMutation(api.notes.create);
+  const archive = useMutation(api.notes.archiveNote);
   const router = useRouter();
+
+  const onArchive = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    event.stopPropagation();
+
+    if (!id) return;
+    const promise = archive({ id });
+
+    toast.promise(promise, {
+      loading: "Archiving note...",
+      success: "Note archived!",
+      error: "Error archiving note",
+    });
+  };
 
   const handleExpand = (
     event: React.MouseEvent<HTMLDivElement, MouseEvent>
@@ -45,7 +66,7 @@ export const NavigationItem: React.FC<Props> & { Skeleton: any } = ({
   };
 
   const onCreate = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-    event.stopPropagation();
+    event.stopPropagation(); // prevent parent onClick from firing
 
     if (!id) return;
 
@@ -92,12 +113,21 @@ export const NavigationItem: React.FC<Props> & { Skeleton: any } = ({
         </kbd>
       )}
       {!!id && (
-        <div
-          role="button"
-          onClick={onCreate}
-          className="ml-auto opacity-0 group-hover:opacity-60 hover:!opacity-100"
-        >
-          <Plus className="" width={20} />
+        <div className="ml-auto flex items-center gap-1 relative">
+          <div
+            role="button"
+            onClick={onArchive}
+            className="opacity-0 group-hover:opacity-60 hover:!opacity-100"
+          >
+            <Trash width={16} />
+          </div>
+          <div
+            role="button"
+            onClick={onCreate}
+            className=" opacity-0 group-hover:opacity-60 hover:!opacity-100"
+          >
+            <Plus className="" width={20} />
+          </div>
         </div>
       )}
     </div>

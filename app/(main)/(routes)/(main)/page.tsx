@@ -24,7 +24,7 @@ const NotesPage = () => {
     <div className={`p-10  w-full h-full`}>
       <div className="w-full h-full flex flex-col justify-center items-center gap-3">
         <h2 className="text-6xl font-semibold orbitron">Welcome!</h2>
-        <p className="opacity-70 mb-3">
+        <p className="opacity-70 mb-3 text-center">
           Embark on your space journey! Start documenting every unique moment
           and amazing discovery.
         </p>

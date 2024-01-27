@@ -87,7 +87,7 @@ export const NavigationItem: React.FC<Props> & { Skeleton: any } = ({
       <span className="truncate">{label}</span>
       {isSearch && (
         <kbd className="ml-auto pointer-events-none px-2 select-none items-center rounded border border-secondary opacity-40 flex gap-1">
-          <span className="text-[9px] font-semibold">⌘</span>
+          <span className="text-xs font-semibold">⌘</span>
           <span className="font-semibold">k</span>
         </kbd>
       )}

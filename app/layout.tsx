@@ -1,10 +1,12 @@
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 import "./globals.css";
+import type { Metadata } from "next";
+import { Inter, Orbitron } from "next/font/google";
 import ConvexProviderClient from "@/components/providers/convex-provider";
 import { Toaster } from "sonner";
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({ subsets: ["latin"], variable: "--inter" });
+
+const orbitron = Orbitron({ subsets: ["latin"], variable: "--orbitron" });
 
 export const metadata: Metadata = {
   title: "NoteX",
@@ -32,7 +34,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={`${inter.variable} ${orbitron.variable}`}>
         <ConvexProviderClient>
           <Toaster position="bottom-center" />
           {children}

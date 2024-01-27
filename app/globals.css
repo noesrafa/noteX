@@ -16,7 +16,7 @@ body {
 }
 
 .orbitron {
-  font-family: "Orbitron", sans-serif !important;
+  font-family: var(--orbitron);
 }
 
 .divider {

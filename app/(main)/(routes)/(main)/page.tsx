@@ -1,5 +1,4 @@
 "use client";
-
 import Button from "@/components/button/button";
 import { api } from "@/convex/_generated/api";
 import { useUser } from "@clerk/clerk-react";
@@ -12,8 +11,7 @@ const NotesPage = () => {
   const create = useMutation(api.notes.create);
 
   const onCreate = () => {
-    console.log("Creating note");
-    const promise = create({ heading: "Yujuuu" });
+    const promise = create({ heading: "Untitled" });
 
     toast.promise(promise, {
       loading: "Creating note...",
